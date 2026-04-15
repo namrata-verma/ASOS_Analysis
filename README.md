@@ -145,6 +145,3 @@ The script saves:
 - `plt.show()` is disabled to avoid hanging in non-interactive runs
 - The script is currently a single-file analysis engine, so it runs directly from `asos.py`
 
----
-
-**This README now matches the latest `asos.py` implementation and focuses only on that script.**
