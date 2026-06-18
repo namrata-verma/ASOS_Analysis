@@ -1,8 +1,8 @@
-# asos.py - ASOS Product Analysis Engine 🚀
+# asos.py - ASOS Product Analysis Engine 
 
 A direct README for the `asos.py` script, describing exactly how the file processes ASOS product listing data, extracts brands, computes price statistics, and generates visualizations.
 
-## 🔧 What `asos.py` Does
+## What `asos.py` Does
 
 - Loads `products_asos.csv` with robust CSV parsing
 - Cleans `price` using `pd.to_numeric(..., errors='coerce')`
@@ -13,7 +13,7 @@ A direct README for the `asos.py` script, describing exactly how the file proces
 - Generates summary statistics and saves the results
 - Creates two polished PNG visualizations
 
-## 🧩 Library Dependencies
+## Library Dependencies
 
 ```python
 import pandas as pd
@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 ```
 
-## 📥 Data Loading
+## Data Loading
 
 ```python
 df = pd.read_csv("products_asos.csv", on_bad_lines="skip")
@@ -30,7 +30,7 @@ df = pd.read_csv("products_asos.csv", on_bad_lines="skip")
 - Prints the first 5 rows for a quick sanity check
 - Reports the cleaned record count after price conversion
 
-## 💰 Price Cleaning
+## Price Cleaning
 
 ```python
 df["price"] = pd.to_numeric(df["price"], errors="coerce")
@@ -39,7 +39,7 @@ df = df.dropna(subset=["price"])
 - Converts price strings to numeric values
 - Removes rows with invalid or missing prices
 
-## 🏷️ Brand Extraction
+## Brand Extraction
 
 ### Primary Extraction
 
@@ -71,7 +71,7 @@ df["Brand"] = df["Brand"].replace(brand_map)
 - Normalizes brand names for consistent grouping
 - Prevents duplicate brand labels where URL formatting varies
 
-## 🔍 Secondary Validation Methods
+## Secondary Validation Methods
 
 ### Description-Based Extraction
 
@@ -101,7 +101,7 @@ df["brand_from_name"] = df["name"].apply(extract_brand_from_name)
 - Uses the first two words of the product name as a fallback brand heuristic
 - Used only for comparison, not to overwrite the main `Brand`
 
-## ✅ Quality Check
+## Quality Check
 
 ```python
 df["brand_mismatch"] = df["Brand"] != df["brand_from_name"]
@@ -110,7 +110,7 @@ df["brand_mismatch"].value_counts()
 - Tracks mismatches between URL-derived and name-derived brand values
 - Outputs the first 10 mismatch examples for review
 
-## 📈 Price Statistics
+## Price Statistics
 
 ```python
 brand_stats = df.groupby('Brand')['price'].agg(['count', 'mean', 'median', 'std']).round(2)
@@ -118,7 +118,7 @@ brand_stats = df.groupby('Brand')['price'].agg(['count', 'mean', 'median', 'std'
 - Computes count, mean, median, and standard deviation by brand
 - Sorts brands by product count for top-brand insight
 
-## 📊 Visualizations
+## Visualizations
 
 ### Price Distribution Chart
 - Produces `asos_price_distribution.png`
@@ -131,7 +131,7 @@ brand_stats = df.groupby('Brand')['price'].agg(['count', 'mean', 'median', 'std'
 - Creates a horizontal bar chart of the top 10 brands
 - Shows product counts directly on the bars
 
-## 💾 Output Files
+## Output Files
 
 The script saves:
 - `processed_asos_data.csv` — cleaned dataset with brand fields
@@ -139,7 +139,7 @@ The script saves:
 - `asos_price_distribution.png` — price distribution visualization
 - `asos_brand_distribution.png` — top brand count visualization
 
-## 🔧 Notes
+## Notes
 
 - `matplotlib` and `seaborn` are used for plotting styles
 - `plt.show()` is disabled to avoid hanging in non-interactive runs
