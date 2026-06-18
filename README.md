@@ -1,7 +1,5 @@
 # asos.py - ASOS Product Analysis Engine 
 
-A direct README for the `asos.py` script, describing exactly how the file processes ASOS product listing data, extracts brands, computes price statistics, and generates visualizations.
-
 ## What `asos.py` Does
 
 - Loads `products_asos.csv` with robust CSV parsing
